@@ -1,10 +1,3 @@
-create table animal
-(
-    id          serial primary key,
-    title       text unique not null,
-    description text
-);
-
 create table employee
 (
     id         serial primary key,

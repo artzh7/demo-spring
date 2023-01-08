@@ -8,16 +8,16 @@ import java.util.stream.Stream
 
 @Repository
 class EmployeeRepository(
-  private val jdbcTemplate: NamedParameterJdbcTemplate,
+  private val secondaryJdbcTemplate: NamedParameterJdbcTemplate,
 ) {
   fun findAll(): Stream<Employee> =
-    jdbcTemplate.queryForStream(
+    secondaryJdbcTemplate.queryForStream(
       "select * from $EMPLOYEE_TABLE",
       MapSqlParameterSource()
     ) {rs, _ -> rs.toEmployee()}
 
   fun findById(id: Long): Employee? =
-    jdbcTemplate.queryForObject(
+    secondaryJdbcTemplate.queryForObject(
       "select * from $EMPLOYEE_TABLE where id = :id",
       MapSqlParameterSource().addValue("id", id)
     ) {rs, _ -> rs.toEmployee()}

@@ -3,6 +3,12 @@ server:
 
 spring:
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/dev'
+    url: 'jdbc:postgresql://localhost:5432/dev1'
     username: test
     password: test
+    driver-class-name: org.postgresql.Driver
+  secondDatasource:
+    url: 'jdbc:postgresql://localhost:5433/dev2'
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver

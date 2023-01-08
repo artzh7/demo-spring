@@ -1,11 +1,20 @@
 version: '3'
 
 services:
-  postgres:
+  postgres1:
     image: postgres
     environment:
-      - POSTGRES_DB=dev
+      - POSTGRES_DB=dev1
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=test
     ports:
       - "5432:5432"
+
+  postgres2:
+    image: postgres
+    environment:
+      - POSTGRES_DB=dev2
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - "5433:5433"

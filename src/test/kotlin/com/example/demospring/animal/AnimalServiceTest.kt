@@ -25,7 +25,10 @@ class AnimalServiceTest {
 
   @BeforeEach
   fun refill() {
-    ScriptUtils.runInitScript(JdbcDatabaseDelegate(container, ""), "db/animal/before-each.sql")
+    ScriptUtils.runInitScript(
+      JdbcDatabaseDelegate(container, ""),
+      "db/animal/before-each.sql"
+    )
   }
 
   @Test

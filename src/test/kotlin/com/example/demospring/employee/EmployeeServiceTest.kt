@@ -1,7 +1,7 @@
 package com.example.demospring.employee
 
 import com.example.demospring.TestcontainersInitializer
-import com.example.demospring.TestcontainersInitializer.Companion.container
+import com.example.demospring.TestcontainersInitializer.Companion.secondaryContainer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.testcontainers.ext.ScriptUtils
 import org.testcontainers.jdbc.JdbcDatabaseDelegate
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
+//import java.util.concurrent.CountDownLatch
+//import java.util.concurrent.TimeUnit
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -27,7 +27,10 @@ class EmployeeServiceTest {
 
   @BeforeEach
   fun refill() {
-    ScriptUtils.runInitScript(JdbcDatabaseDelegate(container, ""), "db/employee/before-each.sql")
+    ScriptUtils.runInitScript(
+      JdbcDatabaseDelegate(secondaryContainer, ""),
+      "db/employee/before-each.sql"
+    )
   }
 
   @Test
@@ -46,10 +49,9 @@ class EmployeeServiceTest {
     }
     assertNotNull(exception)
     assertTrue(exception is DataAccessException)
-    waitSeconds(60)
   }
 
-  fun waitSeconds(seconds: Long) {
-    CountDownLatch(1).await(seconds, TimeUnit.SECONDS)
-  }
+//  fun waitSeconds(seconds: Long) {
+//    CountDownLatch(1).await(seconds, TimeUnit.SECONDS)
+//  }
 }

@@ -8,16 +8,16 @@ import java.util.stream.Stream
 
 @Repository
 class AnimalRepository(
-  private val jdbcTemplate: NamedParameterJdbcTemplate,
+  private val primaryJdbcTemplate: NamedParameterJdbcTemplate,
 ) {
   fun findAll(): Stream<Animal> =
-    jdbcTemplate.queryForStream(
+    primaryJdbcTemplate.queryForStream(
       "select * from $ANIMAL_TABLE",
       MapSqlParameterSource()
     ) {rs, _ -> rs.toAnimal()}
 
   fun findById(id: Long): Animal? =
-    jdbcTemplate.queryForObject(
+    primaryJdbcTemplate.queryForObject(
       "select * from $ANIMAL_TABLE where id = :id",
       MapSqlParameterSource().addValue("id", id)
     ) {rs, _ -> rs.toAnimal()}
