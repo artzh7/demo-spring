@@ -8,6 +8,9 @@ class UserRequestService(
   private val userRequestRepository: UserRequestRepository,
 ) {
 
-  fun findAll(): Stream<UserRequestResponse>
-    = userRequestRepository.findAll().map { it.toUserRequestResponse() }
+  fun findAll(): Stream<UserRequestResponse> =
+    userRequestRepository.findAll().map { it.toUserRequestResponse() }
+
+  fun add(userRequestInput: UserRequestInput): UserRequest =
+    userRequestRepository.add(userRequestInput.toUserRequest())
 }

@@ -23,4 +23,20 @@ class UserRequestRepository(
     request = getString("request"),
     createdAt = getTimestamp("created_at").toLocalDateTime()
   )
+
+  fun add(userRequest: UserRequest): UserRequest {
+    val query = """
+      insert into $USER_REQUEST_TABLE 
+      (username, request, created_at)
+      values (:username, :request, :createdAt)
+      returning id
+    """.trimIndent()
+    val params = MapSqlParameterSource()
+      .addValue("username", userRequest.username)
+      .addValue("request", userRequest.request)
+      .addValue("createdAt", userRequest.createdAt)
+    val id = primaryJdbcTemplate.queryForObject(query, params, Long::class.java)
+    userRequest.id = id
+    return userRequest
+  }
 }

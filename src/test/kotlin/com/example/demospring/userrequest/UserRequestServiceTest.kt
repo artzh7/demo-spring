@@ -38,4 +38,12 @@ class UserRequestServiceTest {
     Assertions.assertEquals(2, requests.size)
     requests.forEach { log.info("$it") }
   }
+
+  @Test
+  fun test2() {
+    val userRequestInput = UserRequestInput("blvlfl", "test request")
+    userRequestService.add(userRequestInput)
+    val request = userRequestService.findAll().toList().firstOrNull { it.id == 3L }
+    log.info("$request")
+  }
 }
