@@ -14,9 +14,9 @@ class ImageController(
   private val log = LoggerFactory.getLogger(this::class.java)
 
   @GetMapping("/preview")
-  fun getImagePreview(@RequestParam url: String): ImagePreview {
+  fun getImagePreview(@RequestParam url: String, @RequestParam size: Int): ImagePreview {
     val start = System.currentTimeMillis()
-    val result = imageService.getImagePreview(url)
+    val result = imageService.getImagePreview(url, size)
     val end = System.currentTimeMillis()
     log.info("getImagePreview: time = ${end - start} ms")
     return result
